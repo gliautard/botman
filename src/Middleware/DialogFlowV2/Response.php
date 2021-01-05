@@ -14,6 +14,11 @@ class Response
     /**
      * @var string
      */
+    private $richReply;
+
+    /**
+     * @var string
+     */
     private $action;
 
     /**
@@ -51,6 +56,23 @@ class Response
     public function setReply(string $reply): Response
     {
         $this->reply = $reply;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRichReply(): array
+    {
+        return $this->richReply;
+    }
+
+    /**
+     * @param array $richReply
+     */
+    public function setRichReply(array $richReply): Response
+    {
+        $this->richReply = $richReply;
         return $this;
     }
 

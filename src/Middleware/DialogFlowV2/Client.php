@@ -59,6 +59,11 @@ class Client
             throw new DialogFlowV2NoIntentException('No intent detected.');
         }
 
+        $richReply = [];
+        foreach ($queryResult->getFulfillmentMessages() as $message) {
+            $richReply[] = json_decode($message->serializeToJsonString());
+        }
+
         $response = new Response();
         $response
             ->setIntent($queryResult->getIntent()->getDisplayName())
@@ -66,6 +71,7 @@ class Client
             ->setContexts($this->getContexts($queryResult))
             ->setAction($queryResult->getAction())
             ->setReply($queryResult->getFulfillmentText())
+            ->setRichReply($richReply)
             ->setIsComplete(!$queryResult->getAllRequiredParamsPresent())
         ;
 
